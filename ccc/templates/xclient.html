@@ -1,0 +1,54 @@
+<title>空调系统界面导航</title>
+{% extends "base.html" %}
+
+{% block main %}
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3>房间 {{room.room_num}} 面板</h3>
+  </div>
+  <div class="panel-body">
+  <form action="" method="POST">
+    <div class="input-group">
+      <span class="input-group-addon">当前温度</span>
+      <input type="text" class="form-control" placeholder="{{room.temp_now}}" id="temp_now" disabled>
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">设定温度</span>
+      <input type="text" class="form-control" placeholder="{{room.temp_set}}" id="temp_set">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">风速设定</span>
+      <select class="form-control" placeholder="{{room.speed}}" id="speed">
+        <option>LOW</option>
+        <option>MIDDLE</option>
+        <option>HIGH</option>
+      </select>
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">模式设定</span>
+      <select class="form-control" placeholder="{{room.mode}}" id="mode">
+        <option>UNSET</option>
+        <option>COLD</option>
+        <option>HOT</option>
+      </select>
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">联机状态</span>
+      <select class="form-control" placeholder="{{room.connected}}" id="connected">
+        <option>T</option>
+        <option>F</option>
+      </select>
+    </div>
+    <br>
+    <input class="btn btn-primary" type="submit" value="确认设置" onClick="javascript:alert('提交成功'); return true;">
+    <input class="btn" type="reset" value="重置设置">
+     {%csrf_token%}
+  </form>
+  </div>
+</div>
+
+{% endblock %}

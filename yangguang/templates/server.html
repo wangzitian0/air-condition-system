@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <title>Server</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="refresh" content="7">
+        <link rel="stylesheet" type="text/css" href="../static/css/index.css"/>
+        
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="jquery.mlens-1.0.min.js"></script>
+        
+        
+        <style>
+        body
+        {
+            font-family : Arial;
+            background-color : #EFEFEF;
+        }
+        .content
+        {
+            width : 800px;
+            height : 600px;
+            padding : 25px 50px;
+            margin : 25px auto;
+            background-color : #fff;
+            box-shadow: 0px 0px 10px #999;
+            border-radius: 15px;
+        }
+        
+        .contentblock
+        {
+            width : 950px;
+            margin : 0 auto;
+            padding : 0;
+            border-spacing : 25px 0;
+        }
+        
+        .contentblock td
+        {
+            background-color : #fff;
+            padding : 25px 50px;
+            vertical-align : top;
+            box-shadow: 0px 0px 10px #999;
+            border-radius: 15px;
+        }
+        
+        h1
+        {
+            text-align : center;
+            font-family : Arial;
+            font-size : 30px;
+        }
+        
+        code
+        {
+            display : block;
+            padding : 10px;
+            margin : 10px 10px;
+        }
+        p code
+        {
+            display : inline;
+            padding : 0;
+            margin : 0;
+        }
+        
+        .downloadpaper
+        {
+            padding-left : 20px;
+            float : right;
+            text-align : center;
+        }
+        
+        #demoframe
+        {
+            border : 0;
+            padding : 0;
+            margin : 0;
+            width : 100%;
+            height : 340px;
+        }
+        
+        </style>
+    </head>
+    
+    <body>
+        
+        <table class="contentblock">
+            <tr>
+                <td style="width:300px;">
+                    
+                    <h2 >State_Control</h2>
+                    <hr /><br />
+                    
+                    <div id = "server"></div>
+                    
+                    <script>
+                        var url = location.href;
+                        var paraString = url.split("%25");
+                        var len = paraString.length - 1
+                        var room_id = paraString[len]
+                        var server_state = paraString[len-1]
+                        var server_mode = paraString[len-2]
+                        
+                        var para=document.createElement("p1");
+                        para.setAttribute("id","server_state");
+                        var node=document.createTextNode("server state: " + server_state);
+                        para.appendChild(node);
+                        var element=document.getElementById("server");
+                        element.appendChild(para);
+                        
+                    </script>
+                    
+                    <br />
+                    <div id = "br"></div>
+                    
+                    <script>
+                        para=document.createElement("p2");
+                        para.setAttribute("id","server_mode");
+                        node=document.createTextNode("server mode: " + server_mode);
+                        para.appendChild(node);
+                        element=document.getElementById("br");
+                        element.appendChild(para);
+                    </script>
+                    
+                    <br /><hr /><br />
+                    
+                    <div align="center" id="content">
+                        <form id="form" action="" method="post">
+                            warm<input type="radio" id = "warm" name="mode" value="warm"/> &nbsp;&nbsp;&nbsp;&nbsp;
+                            cold<input type="radio" id = "cold" name="mode" value="cold" checked/><br /><br />
+                            <input type="submit" name="start" value="on">
+                            <input type="submit" name="start" value="off">
+                        </form>
+                    </div>
+                    
+                    <hr /><br />
+                    
+                    <div align="center" id="content">
+                        <form id="form1" action="" method="post">
+                            <input type="submit" name="restart" value="restart">
+                        </form>
+                    </div>
+                    
+                    <script>
+                        if (server_mode == "cold") document.getElementById("cold").checked=true
+                        else if (server_mode == "warm") document.getElementById("warm").checked=true
+                    </script>
+                </td>
+                
+                
+                <td style="width:500px;">
+                    <h2>Watch</h2>
+                    
+                    <iframe src="/watch", id = "watch", frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes">
+                    </iframe>
+                </td>
+                
+            </tr>
+        </table>
+        
+        <div class="content">
+            
+            <h2>Report</h2>
+            
+            <hr /><br />
+            
+            <iframe src="/reportsheet/", width="750", height="450", frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes">
+            </iframe>
+            
+            <!--
+            <iframe src="/reportsheet/%<report_search>%", width="750", height="450", frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes">
+            </iframe>
+             -->
+            
+        </div>
+
+        
+        <div class="content">
+            
+            <h2>Static</h2>
+            
+            <iframe src="/roomstatic", width="750", height="450", frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes">
+            </iframe>
+           
+        </div>
+        
+    </body>
+</html>

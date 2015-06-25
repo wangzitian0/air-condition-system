@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="refresh" content="5">
+        <title>welcome</title>
+        <link rel="stylesheet" type="text/css" href="../static/css/index.css"/>
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="jquery.mlens-1.0.min.js"></script>
+        
+        <style>
+        body
+        {
+            font-family : Arial;
+            background-color : #fff;
+        }
+        </style>
+
+    </head>
+    
+    <body>
+        
+        <table class="table" cellpadding="5" cellspacing="10">
+            <thead>
+                <tr>
+                    <th>room_id</th>
+                    <th>temp</th>
+                    <th>state</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client_request in room_watch %}
+                <tr>
+                    
+                    <td>{{ client_request.room_id }}</td>
+                    <td>{{ client_request.room_temp }}</td>
+                    <td>{{ client_request.room_state }}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
+

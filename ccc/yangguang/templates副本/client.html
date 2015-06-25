@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Client</title>
+        <link rel="stylesheet" type="text/css" href="../static/css/index.css"/>
+        
+        <style type="text/css">
+            div#container{
+                background: #F0F8FF  repeat-y center;
+                position: absolute;
+                left: 50%;
+                width: 800px;
+                margin-left: -400px;
+            }
+        div#header {background-color:#F0F8FF}
+        div#menu0 {background-color:#FFFAF0;height:400px;width:200px;float:left;}
+        div#menu1 {background-color:#FFFFF0;height:400px;width:200px;float:right;}
+        div#content {background-color:#FFF5EE;height:400px;width:400px;float:left;}
+        div#footer {background-color:#F0FFFF;clear:both;text-align:center;}
+        
+        h1 {margin-bottom:0;}
+        h2 {margin-bottom:0;font-size:18px;}
+        ul {margin:0;}
+        li {list-style:none;}
+        </style>
+    </head>
+    
+    <script>
+        function startTime()
+        {
+            var today=new Date()
+            document.getElementById('footer').innerHTML=today
+            t=setTimeout('startTime()',500)
+        }
+    </script>
+    <body onload="startTime()">
+        
+        <div id="container">
+            
+            <div id="header">
+                <h1 align="center">Client</h1>
+            </div>
+            
+            <div id="menu0">
+                <script>
+                    var url = location.href;
+                    var paraString = url.split("%25")
+                    len = paraString.length - 1
+                    var room_id = paraString[len]
+                    var client_state = paraString[len-1]
+                    var client_power = paraString[len-2]
+                    var client_mode = paraString[len-3]
+                    
+                    
+                    alert(client_mode);
+                    
+                    if (client_state.indexOf("%20") >= 0) client_state = "off failure"
+                    
+                    var para=document.createElement("li");
+                    para.setAttribute("id","room_id");
+                    var node=document.createTextNode("Room: " + room_id);
+                    para.appendChild(node);
+                    var element=document.getElementById("menu0");
+                    element.appendChild(para);
+                    
+                    var para=document.createElement("li");
+                    para.setAttribute("id","client_state");
+                    var node=document.createTextNode("Client State: " + client_state);
+                    para.appendChild(node);
+                    var element=document.getElementById("room_id");
+                    element.appendChild(para);
+                </script>
+            </div>
+            
+            
+            <div id="menu1">
+                <li>price(（date－date）)</li>
+            </div>
+            
+            <div align="center" id="content">
+               
+                <div id="hra"></div>
+                
+                <script>
+                    function setCookie(c_name, temp)
+                    {
+                        var exdate=new Date()
+                        expiredays=1
+                        exdate.setDate(exdate.getDate()+expiredays)
+                        document.cookie=c_name+ "=" +escape(temp)+
+                        ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+                    }
+                    function getCookie(c_name)
+                    {
+                        if (document.cookie.length>0)
+                        {
+                            c_start=document.cookie.indexOf(c_name + "=")
+                            if (c_start!=-1)
+                            {
+                                c_start=c_start + c_name.length+1
+                                c_end=document.cookie.indexOf(";",c_start)
+                                if (c_end==-1) c_end=document.cookie.length
+                                return unescape(document.cookie.substring(c_start,c_end))
+                            } 
+                        }
+                        return ""
+                    }
+                </script>
+                
+                <script>
+                    var temp
+                    if (document.cookie.indexOf(room_id+"temp")!=-1)
+                        temp = getCookie(room_id + "temp")
+                    else temp = 25
+                    setCookie(room_id + "temp",temp);
+                    
+                    //temp = 25
+                    var para=document.createElement("p");
+                    para.setAttribute("id","p1");
+                    var node=document.createTextNode(temp);
+                    para.appendChild(node);
+                    var element=document.getElementById("hra");
+                    element.appendChild(para);
+                    
+                    function change(add)
+                    {
+                        x=document.getElementById("p1");
+                        temp= x.innerHTML
+                        if (add == 1){
+                            temp=parseFloat(temp) + 1;
+                            templ=Math.round(temp*10)/10;
+                        }
+                        else if (add == 0){
+                            temp=parseFloat(temp) - 1;
+                            templ=Math.round(temp*10)/10;
+                        }
+                        document.getElementById("p1").innerHTML=temp;
+                        setCookie(room_id + "temp",temp);
+                    }
+                
+                </script>
+                
+                <script>
+                    var temp_real
+                    if (document.cookie.indexOf(room_id+"temp_real")!=-1)
+                        temp_real = getCookie(room_id + "temp_real")
+                    else
+                        temp_real=Math.floor(Math.random()*(12))+18;
+                    
+                    
+                    //temp_real = 25
+                    temp_real=Math.round(temp_real*10)/10;
+                    var para1=document.createElement("p2");
+                    para1.setAttribute("id","p2");
+                    var node1=document.createTextNode(temp_real);
+                    para1.appendChild(node1);
+                    var element1=document.getElementById("content");
+                    element1.appendChild(para1);
+                    
+                    setCookie(room_id + "temp_real",temp_real);
+                    
+                    var int = self.setInterval("dynamic()", 1000*60);
+                    function dynamic()
+                    {
+                        temp_real=Math.round(temp_real*10)/10;
+                        var fluc=0.1
+                        if(Math.floor(Math.random()*(10000))>5000) temp_real=temp_real+fluc
+                        else temp_real= temp_real-fluc
+                        temp_real=Math.round(temp_real*10)/10;
+                        document.getElementById("p2").innerHTML=temp_real;
+                        setCookie(room_id + "temp_real", temp_real);
+                    }
+                
+                    var int_real =null
+                    if (client_state == "on") int_real=self.setInterval("working()", 1000);
+                    function working()
+                    {
+                        /*
+                        var power_level
+                        var work_mode
+                        
+                        temp_real = getCookie(room_id + "temp_real");
+                        radionum = document.getElementById("form").power
+                        for(var i=0; i<radionum.length; i++){
+                            if(radionum[i].checked)
+                            power_level = parseFloat(radionum[i].value)
+                        }
+                        
+                        radionum = document.getElementById("form").mode
+                        for(i=0; i<radionum.length; i++){
+                            if(radionum[i].checked)
+                            work_mode = radionum[i].value
+                        }
+                        */
+                        
+                        temp_real=Math.round(temp_real*10)/10;
+                        power_level=Math.round(power_level*10)/10;
+                        if(client_mode == "warm"){
+                            if(temp_real < temp) temp_real=temp_real+client_power
+                            else int_real=window.clearInterval(int_real);
+                        }
+                        else{
+                            if(temp_real > temp) temp_real=temp_real-client_power
+                            else int_real=window.clearInterval(int_real);
+                        }
+                        temp_real=Math.round(temp_real*10)/10;
+                        document.getElementById("p2").innerHTML=temp_real;
+                        setCookie(room_id + "temp_real",temp_real);
+                    }
+                
+                </script>
+                    <form action="" id="form" method="post"><br />
+                    <input type="button"  value='+'  onClick = "change('1')">
+                    <input type="button"  value='-'  onClick = "change('0')"><br /><br /><hr /><br />
+                    高风 (0.8)<input type="radio" id= "power1" name="power" value="0.8" checked/>
+                    中风 (0.4)<input type="radio" id= "power2" name="power" value="0.4"/>
+                    低风 (0.2)<input type="radio" id= "power3" name="power" value="0.2"/><br /> <br /><hr />
+                    <input type="hidden"  id ='temp' name="temp" value=""><br />
+                    <input type="hidden"  id ='date' name="date" value="">
+                    warm(25～30)<input type="radio" id= "warm" name="mode" value="warm"/>
+                    cold(18～25)<input type="radio" id= "cold" name="mode" value="cold" checked/><br /><br /><hr />
+                    <input type="submit" name="start" value="on/refresh" >
+                    <input type="submit" name="start" value="off">
+                    </form>
+                    
+                <script>
+                    document.getElementById("temp").value=temp_real;
+                    var date11=new Date()
+                    document.getElementById("date").value=date11;
+                    
+                    if (client_power == 0.8) document.getElementById("power1").checked=true
+                    else if (client_power == 0.4) document.getElementById("power2").checked=true
+                    else if (client_power == 0.2) document.getElementById("power3").checked=true
+                    
+                    if (client_mode == "cold") document.getElementById("cold").checked=true
+                    else if (client_mode == "warm") document.getElementById("warm").checked=true
+                </script>
+                    
+            </div>
+            
+            <div id="footer"></div>
+            
+        </div>
+        
+    </body>
+</html>

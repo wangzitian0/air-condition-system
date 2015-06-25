@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block main %}
+<div class="page-header">
+    <h1>打印代码</h1>
+</div>
+
+<form action="/send-to-print/" method="POST">
+    <input type='hidden' name='user' value={{uname}} />
+    <label for="code">请粘贴代码</label>
+    <textarea class="input-block-level kari-code" cols="40" id="code" name="code" rows="10"></textarea>
+    <div>
+        <input class="btn btn-primary" type="submit" value="提交" onClick="javascript:alert('提交成功'); return true;">
+        <input class="btn" type="reset" value="重置">
+    </div>
+</form>
+{% endblock %}
+

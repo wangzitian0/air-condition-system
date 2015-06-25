@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="panel panel-success">
+  <div class="panel-heading">Board</div>
+  <div class="panel-body">
+    <p>徐壕真帅!</p>
+  </div>
+  <table class="table table-striped">
+    <tr>
+      <th>No.</th>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Advice</th>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <script src="/static/bootstrap/js/bootstrap.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+</head>
+
+<body style="margin-top:60px;">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand active" href="#">TEST</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>Show</li>
+        <li>Yes</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container theme-showcase" role="main">
+  <div>
+  {% block main %}{% endblock %}
+  </div>
+</div>
+</body>

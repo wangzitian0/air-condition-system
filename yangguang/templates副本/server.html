@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Server</title>
+        <link rel="stylesheet" type="text/css" href="../static/css/index.css"/>
+
+        <style type="text/css">
+            div#container{
+                background: #F0F8FF  repeat-y center;
+                position: absolute;
+                left: 50%;
+                width: 800px;
+                margin-left: -400px;
+            }
+            div#header {background-color:#F0F8FF}
+            div#menu {background-color:#FFFAF0;height:400px;width:100px;float:left;}
+            div#menu1 {background-color:#FFFFF0;height:200px;width:200px;float:right;}
+            div#menu2 {background-color:#FFFAFA;height:200px;width:200px;float:right;}
+            div#content {background-color:#FFF5EE;height:400px;width:500px;float:left;}
+            div#footer {background-color:#F0FFFF;clear:both;text-align:center;}
+            
+            h1 {margin-bottom:0;}
+            h2 {margin-bottom:0;font-size:18px;}
+            ul {margin:0;}
+            li {list-style:none;}
+            
+        </style>
+    </head>
+    
+    <script>
+        function startTime()
+        {
+            var today=new Date()
+            document.getElementById('footer').innerHTML=today
+            t=setTimeout('startTime()',500)
+        }
+    </script>
+    <body onload="startTime()">
+
+        <div id="container">
+            
+            <div id="header">
+                <h1 align="center">Server</h1>
+            </div>
+            
+            <div id="menu">
+                <a href="/log" target="_blank">log</a>
+            </div>
+            
+            
+            <div id="menu1">
+                <script>
+                    var url = location.href;
+                    var paraString = url.split("/");
+                    var len = paraString.length - 1
+                    var room_id = paraString[len]
+                    
+                    var para=document.createElement("li");
+                    var node=document.createTextNode("Room: " + room_id);
+                    para.appendChild(node);
+                    
+                    var element=document.getElementById("menu1");
+                    element.appendChild(para);
+                    
+                </script>
+                <li>(more)</li>
+            </div>
+            
+            <div align="center" id="content">
+                <form id="form0" action="" method="post">
+                    warm(25～30)<input type="radio" name="mode" value="warm"/>
+                    cold(18～25)<input type="radio" name="mode" value="cold" /><br /><br />
+                    <input type="submit" name="start" value="on">
+                    <input type="submit" name="start" value="off">
+                </form>
+                <hr / id = "hra">
+                
+                
+                <script>
+                    function setCookie(temp)
+                    {
+                        var exdate=new Date()
+                        var expiredays = 1
+                        exdate.setDate(exdate.getDate()+expiredays)
+                        document.cookie="temp"+ "=" +escape(temp)+
+                        ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+                    }
+                    function getCookie(c_name)
+                    {
+                        if (document.cookie.length>0){
+                            c_start=document.cookie.indexOf(c_name + "=")
+                            if (c_start!=-1)
+                            {
+                                c_start=c_start + c_name.length+1
+                                c_end=document.cookie.indexOf(";",c_start)
+                                if (c_end==-1) c_end=document.cookie.length
+                                return unescape(document.cookie.substring(c_start,c_end))
+                            }
+                        }
+                        return ""
+                    }
+                </script>
+                
+                <script>
+                    var temp
+                    if (document.cookie.length>0)  temp = getCookie("temp")
+                    else temp = 25
+                    
+                    var para=document.createElement("p");
+                    para.setAttribute("id","p1");
+                    var node=document.createTextNode(temp);
+                    para.appendChild(node);
+                    
+                    var element=document.getElementById("hra");
+                    element.appendChild(para);
+
+                    function change(add)
+                    {
+                        x=document.getElementById("p1");
+                        var temp= x.innerHTML
+                        if (add == 1){
+                            temp=parseFloat(temp) + 1
+                        }
+                        else if (add == 0){
+                            temp=parseFloat(temp) - 1
+                        }
+                        document.getElementById("p1").innerHTML=temp;
+                        document.getElementById("temp").value = temp;
+                        setCookie(temp);
+                    }
+                </script>
+                <body>
+                    <form action="" id="form1" method="post">
+                        <input type="button"  value='+'  onClick = "change('1')">
+                        <input type="button"  value='-'  onClick = "change('0')">
+                        <input type="hidden"  id = 'temp' name="temp" value="">
+                        <input type="submit"  value='submit'>
+                    </form>
+                </body>
+                
+                <p id="p2">［warm］［cold］</p><br />
+                <p id="p3">[on] [wait] [off]</p>
+            </div>
+            
+            <div id="menu2">
+                <li>requese(more)</li>
+            </div>
+            
+            <div id="footer">
+            </div>
+        </div>
+        
+    </body>
+</html>

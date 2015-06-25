@@ -1,0 +1,19 @@
+开发系统为ubuntu14.04
+python虚拟环境virtualenv在env文件夹下
+source env/bin/activate命令激活
+所有的包都可以使用pip install安装
+运行程序可以直接在ccc目录下执行:
+python manage.py runserver 0.0.0.0:yourPort
+
+
+使用的库的版本如下
+
+Django==1.8.2
+django-bootstrap-toolkit==2.15.0
+django-bootstrap3==5.4.0
+django-grappelli==2.6.4
+itsdangerous==0.24
+MarkupSafe==0.23
+pytz==2015.4
+uWSGI==2.0.10
+Werkzeug==0.10.4

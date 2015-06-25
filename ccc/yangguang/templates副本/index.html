@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>welcome</title>
+        <link rel="stylesheet" type="text/css" href="../static/css/index.css"/>
+        
+        <style type="text/css">
+            div#container{
+                background: #F0F8FF  repeat-y center;
+                position: absolute;
+                left: 50%;
+                width: 400px;
+                margin-left: -200px;
+            }
+        div#header {background-color:#F0F8FF}
+        div#content {background-color:#FFF5EE;height:200px;width:400px;float:left;}
+        div#footer {background-color:#F0FFFF;clear:both;text-align:center;}
+        
+        h1 {margin-bottom:0;}
+        h2 {margin-bottom:0;font-size:18px;}
+        ul {margin:0;}
+        li {list-style:none;}
+        
+        </style>
+    </head>
+    
+    <script>
+        function startTime()
+        {
+            var today=new Date()
+            document.getElementById('footer').innerHTML=today
+            t=setTimeout('startTime()',500)
+        }
+    </script>
+    
+    <body onload="startTime()">
+    <div id="container">
+        
+        <div id="header">
+            <h1 align="center">Login</h1>
+        </div>
+        
+        <br /><p align="center">~~~room id 'XXX'(X = '1'-'9')~~~</p><br />
+        <p align="center">Input '000' to login the server,</p>
+        <p align="center"> others to the clients.</p><br /><br />
+
+        <div align="center" id="content">
+            <div class="item">
+                <form action="" method="post" target="_blank">
+                    <input type="text" placeholder="please input room id" name="room_id" /><br/><br/>
+                    <input type="submit" target="_blank" value="Login"/>
+                </form>
+            </div>
+        </div>
+    
+        <div id="footer"></div>
+    </div>
+    </body>
+</html>

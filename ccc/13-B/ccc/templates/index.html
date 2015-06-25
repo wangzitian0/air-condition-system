@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+空调系统界面导航
+{% endblock %}
+
+{% block head %}
+<meta http-equiv="refresh" content="{{setting.refresh}}">
+{% endblock %}
+
+{% block main %}
+<div class="panel panel-success">
+  <div class="panel-heading">空调系统界面导航</div>
+  <div class="panel-body">
+    <p>server端</p>
+    <a class="btn btn-primary" href="/admin/server/client/">服务端面板</a>
+    <a class="btn btn-primary" href="/admin/server/cost/">账单明细</a>
+    <a class="btn btn-primary" href="/admin/server/price/">单价设置</a>
+    <p>server端</p>
+    {% for it in client %}
+        <a class="btn btn-primary" href="/client/{{ it.room_num }}">client{{ it.room_num }}</a>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

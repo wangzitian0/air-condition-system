@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Submit a form</h3>
+  </div>
+  <div class="panel-body">
+    <form action="" method="post">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <p>Your name:</p>
+          <input class="form-control" type="text" name="yourname" maxlength="30"></input>
+        </li>
+        <li class="list-group-item">
+          <p>Your advice: </p>
+          <textarea class="form-control" cols="20" rows="10" name="youradvice" /></textarea>
+        </li>
+        <li class="list-group-item">
+          <input class="btn btn-primary btn-lg" type="submit" value="Submit"/></input>
+        </li>
+    </ul>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,36 @@
+
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}
+房间 {{room.room_num}} 面板
+{% endblock %}
+{% block head %}
+<meta http-equiv="refresh" content="{{setting.refresh}}">
+{% endblock %}
+
+{% block main %}
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3><a class="btn btn-success" href="./daycost">查日结算账单</a>  房间 {{room.room_num}} 面板</h3>
+  </div>
+  <div class="panel-body">
+    <form action="" method="POST" class="form" id="formform">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <input class="btn btn-primary" type="submit" value="确认设置">
+      <input class="btn btn-default" type="reset" value="重置设置">
+    </form>
+    <form action="" method="POST" class="form invisible" id="sleepform">
+      {% csrf_token %}
+      {% bootstrap_form sleep %}
+      <input class="btn btn-primary" type="submit" value="确认sleep">
+    </form>
+    <form action="" method="POST" class="form invisible" id="stateform">
+      {% csrf_token %}
+      {% bootstrap_form state %}
+      <input class="btn btn-primary" type="submit" value="确认connect">
+    </form>
+  </div>
+</div>
+{% endblock %}
